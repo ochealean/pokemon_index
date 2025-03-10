@@ -14,9 +14,8 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
-
-var login = document.getElementById("signupbtn");
-login.addEventListener("click", function (event) {
+var signup = document.getElementById("signupbtn");
+signup.addEventListener("click", function (event) {
     event.preventDefault(); // Prevent form submission
     var fname = document.getElementById("fname").value;
     var lname = document.getElementById("lname").value;
@@ -32,28 +31,24 @@ login.addEventListener("click", function (event) {
         createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 var user = userCredential.user;
-    
-                // Send email verification and handle it before updating the profile or redirecting
-                sendEmailVerification(user)
-                    .then(() => {
-                        alert("Email Verification sent to your email address. Please verify your email address to login.");
-    
-                        // Update the user's profile with the full name after sending verification
-                        updateProfile(user, { displayName: fullName })
-                            .then(() => {
-                                // Redirect only after all tasks are complete
-                                window.location.href = "login.html";
-                            })
-                            .catch((error) => {
-                                alert("Error updating profile: " + error.message);
-                            });
-                    })
-                    .catch((error) => {
-                        alert("Error sending verification email: " + error.message);
-                    });
+                // Update the user's profile with the full name
+                updateProfile(user, {
+                    displayName: fullName, appName: "POKEDEX"
+                }).then(() => {
+                    // Send email verification
+                    sendEmailVerification(auth.currentUser)
+                        .then(() => {
+                            alert("Email Verification sent to your email address. Please verify your email address to login.");
+                            window.location.href = "login.html";
+                        }).catch((error) => {
+                            alert("Error sending email verification: " + error.message);
+                        });
+                }).catch((error) => {
+                    alert("Error updating profile: " + error.message);
+                });
             })
             .catch((error) => {
                 alert("Error creating user: " + error.message);
             });
-    }    
+    }
 });
