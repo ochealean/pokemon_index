@@ -24,14 +24,18 @@ login.addEventListener("click", function (event) {
 
     // Create a new user with email and password
     signInWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-            var user = userCredential.user;
+    .then((userCredential) => {
+        var user = userCredential.user;
+        if (user.emailVerified) {
             window.location.href = "index.html";
-        })
-        .catch((error) => {
-            alert("Error creating user: " + error.message);
-        });
-
+        } else {
+            window.location.href = "login.html";
+            alert("Email is not verified. Please verify your email address.");
+        }
+    })
+    .catch((error) => {
+        alert("Error signing in: " + error.message);
+    });
 });
 
 var google = document.getElementById("googlebtn");

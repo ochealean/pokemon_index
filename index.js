@@ -28,8 +28,7 @@ onAuthStateChanged(auth, (user) => {
             greet.textContent = "Welcome, " + (user.displayName || user.email);
             image.src = user.photoURL || "guess.png"; // Fallback image
         } else {
-            alert("Email is not verified. Please verify your email address.");
-            window.location.href = "signup.html";
+            window.location.href = "login.html";
         }
     } else {
         // No user is signed in
