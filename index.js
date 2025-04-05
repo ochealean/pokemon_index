@@ -7,8 +7,9 @@ import ImageKit from "./node_modules/imagekit/index.js";
 const imagekit = new ImageKit({
     publicKey: "your_public_api_key",
     urlEndpoint: "https://ik.imagekit.io/your_imagekit_id",
-    authenticationEndpoint: "https://pokemon-index-hazel.vercel.app/api/auth", // Correct URL
+    authenticationEndpoint: "https://pokemon-index-hazel.vercel.app/api/auth",
 });
+
 
 // Upload functionality
 document.getElementById('uploadbtn').addEventListener('click', () => {
