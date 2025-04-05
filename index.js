@@ -1,6 +1,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-app.js";
 import { getAuth, signOut, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-auth.js";
-import ImageKit from "imagekit";
+import ImageKit from "./node_modules/imagekit/index.js";
+
 
 // Initialize ImageKit
 const imagekit = new ImageKit({
